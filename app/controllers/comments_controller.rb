@@ -8,9 +8,11 @@ class CommentsController < ApplicationController
       commentable = Comment.find(params[:comment_id])
       @topic = commentable.topic
     end
+
     @comment = commentable.comments.create(comment_params)
     @comment.user_id = User.find(session[:user_id]).id
-    @comment.save
+    @comment.save # what happens if save fails?
+
     redirect_to topic_path(@topic)
   end
 

@@ -63,6 +63,7 @@ class TopicsController < ApplicationController
       params.require(:topic).permit(:title, :body)
     end
 
+    # probably move to model
     def get_tags(tagable)
       tags = tagable.tags.dup
       tagable.comments.each do |comment|
@@ -71,6 +72,6 @@ class TopicsController < ApplicationController
       end
       tags.uniq
     end
-  
+
 end
 

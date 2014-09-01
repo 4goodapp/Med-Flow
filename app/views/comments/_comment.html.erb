@@ -1,36 +1,36 @@
 <div class="commentShow">
   <p class="commentBody"><%= comment.body %></p>
-    <span class="posted">posted by: <%= comment.user.username %></span></br>
-<div class="action_bar">
-  <ul class="action_bar">
-    <li class="action"><%= render "tagations/form" %></li>
-    <li class="action"><%= render "tags/form" %></li>
-    <% if @user %>
-    <li class="action">
+  <span class="posted">posted by: <%= comment.user.username %></span></br>
+  <div class="action_bar">
+    <ul class="action_bar">
+      <li class="action"><%= render "tagations/form" %></li>
+      <li class="action"><%= render "tags/form" %></li>
+      <% if @user %>
+        <li class="action">
       <%=link_to image_tag("http://icons.iconarchive.com/icons/rokey/the-blacy/128/black-heart-icon.png", width: 30), {controller: "comment_scores", action: "create", comment_id: comment.id, comment_score: {comment_id: comment.id, user_id: @user.id}}, method: 'post'%> 
-    </li>
+      </li>
     <% end %>
-    <li class="action"><%=comment.comment_scores.count%> &#x2764;'s</li>
-    <% if @user == comment.user %>
-    <li class="action"><%= link_to 'Edit', edit_topic_path(@topic) %></li>
-    <li class="action"><%= link_to "Delete", topic_path(@topic), method: :delete,
-                                          data: { confirm: 'Are you sure?' }%> </li>
-    <% end %>  </ul>
-</div>
-<div class="action_bar">
-  <ul class="actionlist">
-    <li class="action"><%= render partial: "comments/commentable", locals: { comment: comment } %></li>
-  </ul>
-</div>
-</div>
+      <li class="action"><%=comment.comment_scores.count%> &#x2764;'s</li>
+      <% if @user == comment.user %>
+        <li class="action"><%= link_to 'Edit', edit_topic_path(@topic) %></li>
+      <li class="action"><%= link_to "Delete", topic_path(@topic), method: :delete,
+        data: { confirm: 'Are you sure?' }%> </li>
+      <% end %>  </ul>
+    </div>
+    <div class="action_bar">
+      <ul class="actionlist">
+        <li class="action"><%= render partial: "comments/commentable", locals: { comment: comment } %></li>
+      </ul>
+    </div>
+  </div>
 
-<% unless comment.comments.empty? %>
- <% comment.comments.each do |comment| %>
-   <% if comment.id %>
-   <div class="subcomment">
-     <%= render partial: "comments/comment", locals: { comment: comment } %>
-   </div>
-  <% end %>
- <% end %>
+  <% unless comment.comments.empty? %>
+    <% comment.comments.each do |comment| %>
+    <% if comment.id %>
+    <div class="subcomment">
+    <%= render partial: "comments/comment", locals: { comment: comment } %>
+  </div>
+<% end %>
+<% end %>
 <% end %>
 
