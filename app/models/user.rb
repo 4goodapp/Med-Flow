@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
 
 
   validates :email, :username, presence: true
-  validates :email, :username, uniqueness: true
+  #validates :email, :username, uniqueness: true
+  validates :email, uniqueness: true, on: :email_changed?
   validates :password, :length => {minimum: 4}
 
 

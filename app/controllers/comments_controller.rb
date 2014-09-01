@@ -8,6 +8,8 @@ class CommentsController < ApplicationController
       commentable = Comment.find(params[:comment_id])
       @topic = commentable.topic
     end
+
+    #@comment = commentable.includes(:comments)
     @comment = commentable.comments.create(comment_params)
     @comment.user_id = User.find(session[:user_id]).id
     @comment.save
